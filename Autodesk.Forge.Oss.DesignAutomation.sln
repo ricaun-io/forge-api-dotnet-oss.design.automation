@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autodesk.Forge.Oss.DesignAutomation", "Autodesk.Forge.Oss.DesignAutomation\Autodesk.Forge.Oss.DesignAutomation.csproj", "{B2289CA1-B106-49B3-9077-6C4F28F0F50C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build", "Build\Build.csproj", "{72B1702D-5E47-4100-97B4-9829A851D449}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{515EBC53-0951-4B74-90A2-BB78830725AC}"
+	ProjectSection(SolutionItems) = preProject
+		CHANGELOG.md = CHANGELOG.md
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Forge.Oss.DesignAutomation.Tests", "Autodesk.Forge.Oss.DesignAutomation.Tests\Autodesk.Forge.Oss.DesignAutomation.Tests.csproj", "{F6F94337-FC3F-4183-A332-A22198E55EE4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2289CA1-B106-49B3-9077-6C4F28F0F50C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2289CA1-B106-49B3-9077-6C4F28F0F50C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2289CA1-B106-49B3-9077-6C4F28F0F50C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2289CA1-B106-49B3-9077-6C4F28F0F50C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72B1702D-5E47-4100-97B4-9829A851D449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72B1702D-5E47-4100-97B4-9829A851D449}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6F94337-FC3F-4183-A332-A22198E55EE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6F94337-FC3F-4183-A332-A22198E55EE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6F94337-FC3F-4183-A332-A22198E55EE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6F94337-FC3F-4183-A332-A22198E55EE4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9AD400A1-F137-4621-A050-4738D820B4D6}
+	EndGlobalSection
+EndGlobal

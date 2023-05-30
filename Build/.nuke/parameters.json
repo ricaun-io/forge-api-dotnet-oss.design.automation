@@ -1,0 +1,4 @@
+{
+  "$schema": "./build.schema.json",
+  "Solution": "../Autodesk.Forge.Oss.DesignAutomation.sln"
+}
