@@ -11,6 +11,12 @@
 * [forge-api-dotnet-oss](https://github.com/ricaun-io/forge-api-dotnet-oss)
 * [forge-api-dotnet-design.automation](https://github.com/Autodesk-Forge/forge-api-dotnet-design.automation)
 
+### PackageReference
+
+```xml
+<PackageReference Include="ricaun.Autodesk.Forge.Oss.DesignAutomation" Version="*" />
+```
+
 ## Release
 
 * [Latest release](../../releases/latest)
