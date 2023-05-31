@@ -7,10 +7,10 @@ namespace Autodesk.Forge.Oss.DesignAutomation.App
     {
         public static async Task Main(string[] args)
         {
-            await DA_Revit.Test();
+            await DA_AutoCAD.Test();
             if (false)
             {
-                await DA_AutoCAD.Test();
+                await DA_Revit.Test();
                 await DA_Inventor.Test();
                 await DA_3dMax.Test();
                 await DA_Revit.AllEngines_Test();

@@ -2,9 +2,9 @@
 using Autodesk.Forge.DesignAutomation;
 using Autodesk.Forge.DesignAutomation.Model;
 using Autodesk.Forge.Oss;
-using Microsoft.Extensions.Options;
 using Autodesk.Forge.Oss.DesignAutomation.Extensions;
 using Autodesk.Forge.Oss.DesignAutomation.Services;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -39,8 +39,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation
         private void WriteLine(object message)
         {
             if (EnableConsoleLogger == false) return;
-            //Console.WriteLine($"[DesignAutomation] {message}");
-            Console.WriteLine($"[{DateTime.UtcNow}] {message}");
+            Log.WriteLine(message);
         }
         #endregion
 
@@ -53,6 +52,10 @@ namespace Autodesk.Forge.Oss.DesignAutomation
         /// ForceCreateWorkItemReport
         /// </summary>
         public bool ForceCreateWorkItemReport { get; init; } = false;
+        /// <summary>
+        /// EnableReportConsoleLogger
+        /// </summary>
+        public bool EnableReportConsoleLogger { get; set; } = false;
         /// <summary>
         /// ForceUpdateAppBundle
         /// </summary>
@@ -308,7 +311,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation
                     WriteLine($"[WorkItem] Created: {workItem.ActivityId}");
                     //WriteLine($"[WorkItem] Created: {workItem.ToJson()}");
                 });
-                WriteLine($"[WorkItem] Wait: {workItemStatus.Id}");
+                WriteLine($"[WorkItem] {engine}: {workItemStatus.Id}");
                 result &= await WorkItemStatusWait(workItemStatus);
             }
 
@@ -704,6 +707,9 @@ namespace Autodesk.Forge.Oss.DesignAutomation
             }
             WorkItems[workItemStatus.Id] = workItemStatus.Status;
 
+            if (workItemStatus.DebugInfoUrl is not null)
+                WriteLine($"[Status]: {workItemStatus.Id} | DebugInfoUrl: {workItemStatus.DebugInfoUrl}");
+
             WriteLine($"[Status]: {workItemStatus.Id} | EstimateTime: {workItemStatus.EstimateTime()}");
             WriteLine($"[Status]: {workItemStatus.Id} | EstimateCosts: {workItemStatus.EstimateCosts():0.0000}");
             WriteLine($"[Status]: {workItemStatus.Id} | {workItemStatus.Status}");
@@ -717,9 +723,9 @@ namespace Autodesk.Forge.Oss.DesignAutomation
                 File.WriteAllText(fileName, $"{report}");
             }
 
-            if (workItemStatus.Status != Status.Success)
+            if (workItemStatus.Status != Status.Success || EnableReportConsoleLogger)
             {
-                WriteLine($"[Status]: {report}");
+                WriteLine($"[Status]: {Environment.NewLine}{report}");
             }
 
             return workItemStatus.Status == Status.Success;
@@ -733,7 +739,6 @@ namespace Autodesk.Forge.Oss.DesignAutomation
         public async Task<WorkItemStatus> GetWorkitemStatusAsync(string id)
         {
             var status = await this.designAutomationClient.GetWorkitemStatusAsync(id);
-            status.ProgressEstimateCosts();
             return status;
         }
 
@@ -742,16 +747,20 @@ namespace Autodesk.Forge.Oss.DesignAutomation
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<object> CheckWorkItemReportAsync(string id)
+        public async Task<string> CheckWorkItemReportAsync(string id)
         {
-            var status = await GetWorkitemStatusAsync(id);
-            if (status.ReportUrl is not null)
+            var workItemStatus = await GetWorkitemStatusAsync(id);
+            if (workItemStatus.ReportUrl is not null)
             {
-                var report = $"{status.Progress}{Environment.NewLine}";
-                report += await requestService.GetStringAsync(status.ReportUrl);
+                //status.ProgressEstimateCosts();
+                //var estimate =
+                //    $"[{Log.GetUtcNow}] EstimateTime: {workItemStatus.EstimateTime()}{Environment.NewLine}" +
+                //    $"[{Log.GetUtcNow}] EstimateCosts: {workItemStatus.EstimateCosts():0.0000}{Environment.NewLine}";
+
+                var report = await requestService.GetStringAsync(workItemStatus.ReportUrl);
                 return report;
             }
-            return status;
+            return string.Empty;
         }
         #endregion
 

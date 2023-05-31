@@ -13,6 +13,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Samples
                 EngineVersions = new[] { "24" },
                 EnableConsoleLogger = true,
                 EnableParameterConsoleLogger = true,
+                EnableReportConsoleLogger = true,
             };
             await service.Initialize(@".\DA\DA4ACAD\ListLayers.zip");
             var result = await service.Run<AutoCADParameterOptions>(options =>
