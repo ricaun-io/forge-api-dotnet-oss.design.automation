@@ -262,7 +262,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Services
         private void WriteLine(object message)
         {
             if (EnableConsoleLogger == false) return;
-            Console.WriteLine($"[{DateTime.UtcNow}] [ParameterArgument] {message}");
+            Log.WriteLine($"[ParameterArgument] {message}");
         }
         #endregion
 

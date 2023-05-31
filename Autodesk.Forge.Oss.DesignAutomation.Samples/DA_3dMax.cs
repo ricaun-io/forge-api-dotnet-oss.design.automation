@@ -13,6 +13,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Samples
                 EngineVersions = new[] { "2021" },
                 EnableConsoleLogger = true,
                 EnableParameterConsoleLogger = true,
+                EnableReportConsoleLogger = true,
             };
             var result = await service.Run<MaxParameterOptions>(options =>
             {

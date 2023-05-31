@@ -15,6 +15,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Samples
                 EngineVersions = new[] { "2021" },
                 EnableConsoleLogger = true,
                 EnableParameterConsoleLogger = true,
+                EnableReportConsoleLogger = true,
             };
 
             await service.Initialize(@".\DA\DA4Revit\DeleteWalls.zip");
