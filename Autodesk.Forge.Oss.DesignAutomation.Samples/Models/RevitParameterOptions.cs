@@ -1,6 +1,6 @@
 ﻿using Autodesk.Forge.Oss.DesignAutomation.Attributes;
 
-namespace Autodesk.Forge.Oss.DesignAutomation.Tests.Models
+namespace Autodesk.Forge.Oss.DesignAutomation.Samples.Models
 {
     public class RevitParameterOptions
     {

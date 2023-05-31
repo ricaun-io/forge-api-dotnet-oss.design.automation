@@ -1,6 +1,4 @@
 ﻿using NUnit.Framework;
-using Autodesk.Forge.Oss.DesignAutomation.Services;
-using Autodesk.Forge.Oss.DesignAutomation.Tests.Models;
 using System.Threading.Tasks;
 
 namespace Autodesk.Forge.Oss.DesignAutomation.Tests
@@ -10,24 +8,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Tests
         [Test]
         public async Task DA_Test()
         {
-            IDesignAutomationService service = new InventorDesignAutomationService("ChangeParam")
-            {
-                EngineVersions = new[] { "2021" },
-                EnableConsoleLogger = true,
-                EnableParameterConsoleLogger = true,
-            };
-            await service.Initialize(@".\DA\DA4Inventor\samplePlugin.bundle.zip");
-            var result = await service.Run<InventorParameterOptions>(options =>
-            {
-                options.InventorDoc = @".\DA\DA4Inventor\box.ipt";
-                options.InventorParams = new()
-                {
-                    height = "16 in",
-                    width = "10 in"
-                };
-            });
-            await service.Delete();
-
+            var result = await Samples.DA_Inventor.Test();
             Assert.IsTrue(result);
         }
     }
