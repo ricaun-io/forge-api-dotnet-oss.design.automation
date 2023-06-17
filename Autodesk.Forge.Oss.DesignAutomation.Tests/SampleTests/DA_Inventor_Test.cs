@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Threading.Tasks;
 
-namespace Autodesk.Forge.Oss.DesignAutomation.Tests
+namespace Autodesk.Forge.Oss.DesignAutomation.Tests.SampleTests
 {
     public class DA_Inventor_Test
     {

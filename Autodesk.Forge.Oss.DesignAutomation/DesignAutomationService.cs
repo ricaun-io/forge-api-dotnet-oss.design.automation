@@ -29,11 +29,11 @@ namespace Autodesk.Forge.Oss.DesignAutomation
 
         #region Console
         /// <summary>
-        /// EnableConsoleLogger
+        /// EnableConsoleLogger (default: false)
         /// </summary>
         public bool EnableConsoleLogger { get; set; } = false;
         /// <summary>
-        /// EnableParameterConsoleLogger
+        /// EnableParameterConsoleLogger (default: false)
         /// </summary>
         public bool EnableParameterConsoleLogger { get; set; } = false;
         private void WriteLine(object message)
@@ -45,31 +45,31 @@ namespace Autodesk.Forge.Oss.DesignAutomation
 
         #region init
         /// <summary>
-        /// RunTimeOutMinutes
+        /// RunTimeOutMinutes (default: 10.0)
         /// </summary>
         public double RunTimeOutMinutes { get; init; } = 10.0;
         /// <summary>
-        /// ForceCreateWorkItemReport
+        /// ForceCreateWorkItemReport (default: false)
         /// </summary>
         public bool ForceCreateWorkItemReport { get; init; } = false;
         /// <summary>
-        /// EnableReportConsoleLogger
+        /// EnableReportConsoleLogger (default: false)
         /// </summary>
         public bool EnableReportConsoleLogger { get; set; } = false;
         /// <summary>
-        /// ForceUpdateAppBundle
+        /// ForceUpdateAppBundle (default: false)
         /// </summary>
         public bool ForceUpdateAppBundle { get; init; } = false;
         /// <summary>
-        /// ForceUpdateActivity
+        /// ForceUpdateActivity (default: false)
         /// </summary>
         public bool ForceUpdateActivity { get; init; } = false;
         /// <summary>
-        /// ForceDeleteNotUsed
+        /// ForceDeleteNotUsed (default: true)
         /// </summary>
         public bool ForceDeleteNotUsed { get; init; } = true;
         /// <summary>
-        /// ForgeEnvironment
+        /// ForgeEnvironment (default: "dev")
         /// </summary>
         public string ForgeEnvironment { get; init; } = "dev";
         #endregion
@@ -683,6 +683,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation
         internal async Task<bool> WorkItemStatusWait(WorkItemStatus workItemStatus, CancellationToken cancellationToken = default)
         {
             const int MillisecondsDelay = 10000;
+            const int MillisecondsDelayCancel = 10000;
 
             if (cancellationToken == CancellationToken.None)
             {
@@ -699,6 +700,8 @@ namespace Autodesk.Forge.Oss.DesignAutomation
                     WriteLine($"[Status]: {workItemStatus.Id} | Cancel");
                     await this.DeleteWorkItemAsync(workItemStatus.Id);
                     workItemStatus.Status = Status.Cancelled;
+                    await Task.Delay(MillisecondsDelayCancel);
+                    workItemStatus = await this.GetWorkitemStatusAsync(workItemStatus.Id);
                     break;
                 }
                 await Task.Delay(MillisecondsDelay);

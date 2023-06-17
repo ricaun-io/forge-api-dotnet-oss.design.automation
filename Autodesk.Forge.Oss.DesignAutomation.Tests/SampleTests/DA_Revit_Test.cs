@@ -1,9 +1,7 @@
 ﻿using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace Autodesk.Forge.Oss.DesignAutomation.Tests
+namespace Autodesk.Forge.Oss.DesignAutomation.Tests.SampleTests
 {
     public class DA_Revit_Test
     {
