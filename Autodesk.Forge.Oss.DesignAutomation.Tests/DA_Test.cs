@@ -11,9 +11,10 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Tests
     {
         RevitDesignAutomationService service;
         ForgeConfiguration forgeConfiguration;
-
+        string Engine;
         public DA_Test()
         {
+            Engine = "2023";
             forgeConfiguration = new ForgeConfiguration()
             {
                 ClientId = Environment.GetEnvironmentVariable("FORGE_CLIENT_ID"),
@@ -21,11 +22,11 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Tests
             };
             service = new RevitDesignAutomationService("Test", forgeConfiguration)
             {
-                EngineVersions = new[] { "2021" },
+                EngineVersions = new[] { Engine },
                 EnableConsoleLogger = true,
                 EnableParameterConsoleLogger = true,
                 EnableReportConsoleLogger = true,
-                RunTimeOutMinutes = 0.2
+                RunTimeOutMinutes = 0.1,
             };
         }
 
@@ -52,8 +53,8 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Tests
         {
             var result = await service.Run<RevitParameterOptions>(options =>
             {
-                options.RvtFile = @".\DA\DA4Revit\DeleteWalls2021.rvt";
-                options.Result = @"Result2021.rvt";
+                options.RvtFile = @$".\DA\DA4Revit\DeleteWalls{Engine}.rvt";
+                options.Result = @$"Result{Engine}.rvt";
             });
             return result;
         }

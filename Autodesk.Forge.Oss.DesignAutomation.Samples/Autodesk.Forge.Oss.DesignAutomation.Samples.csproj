@@ -33,6 +33,12 @@
     <None Update="DA\DA4Revit\DeleteWalls2018.rvt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="DA\DA4Revit\DeleteWalls2019.rvt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DA\DA4Revit\DeleteWalls2020.rvt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="DA\DA4Revit\DeleteWalls2021.rvt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

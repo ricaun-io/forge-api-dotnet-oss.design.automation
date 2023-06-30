@@ -3,6 +3,7 @@ using Autodesk.Forge.DesignAutomation;
 using Autodesk.Forge.DesignAutomation.Model;
 using Autodesk.Forge.Oss;
 using Autodesk.Forge.Oss.DesignAutomation.Extensions;
+using Autodesk.Forge.Oss.DesignAutomation.Handler;
 using Autodesk.Forge.Oss.DesignAutomation.Services;
 using Microsoft.Extensions.Options;
 using System;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace Autodesk.Forge.Oss.DesignAutomation
 {
+
     /// <summary>
     /// DesignAutomationService
     /// </summary>
@@ -118,17 +120,46 @@ namespace Autodesk.Forge.Oss.DesignAutomation
                 ClientId = forgeConfiguration.ClientId,
                 ClientSecret = forgeConfiguration.ClientSecret
             });
+
+            this.CustomHeaderValue = Environment.GetEnvironmentVariable("FORGE_CLIENT_CUSTOM_HEADER_VALUE");
         }
         private ForgeService GetForgeService(ForgeConfiguration forgeConfiguration)
         {
             var client = new HttpClient(new ForgeHandler(Options.Create(forgeConfiguration))
             {
-                InnerHandler = new HttpClientHandler()
+                InnerHandler = new ForgeCustomHeaderValueHandler(GetCustomHeaderValue)
+                {
+                    InnerHandler = new HttpClientHandler()
+                }
             });
 
             return new ForgeService(
                 client
             );
+        }
+        #endregion
+
+        #region Custom Header
+        /// <summary>
+        /// CustomHeaderValue (default: Environment Variable => "FORGE_CLIENT_CUSTOM_HEADER_VALUE")
+        /// <code>x-custom-header: engine value is {0}</code>
+        /// </summary>
+        public string CustomHeaderValue { get; init; }
+        private string GetCustomHeaderValue()
+        {
+            if (string.IsNullOrEmpty(CustomHeaderValue))
+                return null;
+
+            if (string.IsNullOrEmpty(lastEngineName))
+                return null;
+
+            var custom = string.Format(CustomHeaderValue, lastEngineName);
+            return custom;
+        }
+        private string lastEngineName;
+        private void UpdateEngineName(string engineName)
+        {
+            this.lastEngineName = engineName;
         }
         #endregion
 
@@ -355,26 +386,30 @@ namespace Autodesk.Forge.Oss.DesignAutomation
         #endregion
 
         #region DefaultEngine
-        private string DefaultEngine { get; set; }
-        private string GetDefaultEngine()
+        private string _defaultFullEngine;
+        private string GetDefaultFullEngine()
         {
-            if (DefaultEngine is null)
+            if (_defaultFullEngine is null)
             {
                 var engine_version = CoreEngine() + "+" + CoreEngineVersions().FirstOrDefault();
                 var engine = Task.Run(() => GetEngineAsync(engine_version)).GetAwaiter().GetResult();
                 if (engine is null)
                 {
-                    throw new Exception($"Engine '{CoreEngine()}' not found!");
+                    throw new Exception($"Engine '{engine_version}' not found!");
                 }
-                DefaultEngine = engine.Id;
+                _defaultFullEngine = engine.Id;
             }
-            return DefaultEngine;
+            return _defaultFullEngine;
         }
-        private string GetDefaultEngine(string engine)
+        private string GetDefaultEngine(string engine = null)
         {
-            if (engine is null) return GetDefaultEngine();
-
-            return $"{CoreEngine()}+{GetEngineVersion(engine)}";
+            var engineResult = GetDefaultFullEngine();
+            if (engine is not null)
+            {
+                engineResult = $"{CoreEngine()}+{GetEngineVersion(engine)}";
+            }
+            UpdateEngineName(engineResult);
+            return engineResult;
         }
         #endregion
 
