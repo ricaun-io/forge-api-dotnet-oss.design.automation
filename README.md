@@ -32,6 +32,17 @@ FORGE_CLIENT_ID=<your client id>
 FORGE_CLIENT_SECRET=<your client secret>
 ```
 
+#### Custom
+
+You can define a custom header to be sent with each Design Automation requests to the Forge API. 
+
+```bash
+FORGE_CLIENT_CUSTOM_HEADER_VALUE=<your custom header>
+```
+
+The custom header follow pattern `x-my-custom-header: engine value is {0}`. (The value `{0}` is replaced with the engine+version.)
+The header gonna be `x-my-custom-header` and the value `engine value is Autodesk.Revit+2023` when using the engine `Autodesk.Revit+2023`.
+
 ### Samples
 
 This repository contains each sample of the [Autodesk Step-by-Step Tutorial](https://aps.autodesk.com/en/docs/design-automation/v3/tutorials/).
