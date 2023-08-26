@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.0.6] / 2023-08-26
+### Updated
+- Update `ParameterInputAttribute` with Zip support.
+
 ## [1.0.5] / 2023-08-09
 ### Updated
 - Update `Autodesk.Forge.DesignAutomation` to `5.1.2` - (Migrate from OAuth V1 to OAuth V2 with `Autodesk.Forge.Core` to `3.0.2`) 
@@ -30,6 +34,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - First Release (Copy project from: [RevitAddin.DA.Tester](https://github.com/ricaun-io/RevitAddin.DA.Tester/tree/package))
 
 [vNext]: ../../compare/1.0.0...HEAD
+[1.0.6]: ../../compare/1.0.5...1.0.6
 [1.0.5]: ../../compare/1.0.4...1.0.5
 [1.0.4]: ../../compare/1.0.3...1.0.4
 [1.0.3]: ../../compare/1.0.2...1.0.3

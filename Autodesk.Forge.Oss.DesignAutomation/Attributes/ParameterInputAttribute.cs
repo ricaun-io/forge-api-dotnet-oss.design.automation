@@ -36,5 +36,9 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Attributes
         /// Relative File Path inside Zip 
         /// </summary>
         public string ZipPath { get; set; }
+        /// <summary>
+        /// Zip
+        /// </summary>
+        public bool Zip { get; set; } = false;
     }
 }

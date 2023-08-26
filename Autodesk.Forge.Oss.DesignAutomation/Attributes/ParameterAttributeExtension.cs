@@ -20,6 +20,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Attributes
                 Description = parameterInput.Description,
                 Verb = Verb.Get,
                 Required = parameterInput.Required,
+                Zip = parameterInput.Zip,
             };
         }
 
