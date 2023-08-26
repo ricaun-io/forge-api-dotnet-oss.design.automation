@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autodesk.Forge.DesignAutomation.Model;
+using System;
 
 namespace Autodesk.Forge.Oss.DesignAutomation.Attributes
 {
@@ -24,6 +25,10 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Attributes
         /// Description (Activity)
         /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        /// Request method (default: Verb.Put) (Activity)
+        /// </summary>
+        public Verb Verb { get; set; } = Verb.Put;
         /// <summary>
         /// Force to Download File (WorkItem)
         /// </summary>
