@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autodesk.Forge.DesignAutomation.Model;
+using System;
 
 namespace Autodesk.Forge.Oss.DesignAutomation.Attributes
 {
@@ -17,20 +18,28 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Attributes
             LocalName = localName;
         }
         /// <summary>
-        /// Local Name
+        /// Local Name (Activity)
         /// </summary>
         public string LocalName { get; set; }
         /// <summary>
-        /// Description
+        /// Description (Activity)
         /// </summary>
         public string Description { get; set; }
         /// <summary>
-        /// Force to Download File
+        /// Request method (default: Verb.Put) (Activity)
+        /// </summary>
+        public Verb Verb { get; set; } = Verb.Put;
+        /// <summary>
+        /// Force to Download File (WorkItem)
         /// </summary>
         public bool DownloadFile { get; set; } = false;
         /// <summary>
-        /// Zip
+        /// Zip (Activity)
         /// </summary>
         public bool Zip { get; set; } = false;
+        /// <summary>
+        /// Ondemand (Activity)
+        /// </summary>
+        public bool Ondemand { get; set; } = false;
     }
 }
