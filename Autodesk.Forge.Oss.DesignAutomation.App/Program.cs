@@ -11,7 +11,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation.App
     {
         public static async Task Main(string[] args)
         {
-            await Test();
+            await DA_Revit.Test();
             if (false)
             {
                 await DA_Revit.Test();

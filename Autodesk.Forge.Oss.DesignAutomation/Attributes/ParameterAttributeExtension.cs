@@ -21,6 +21,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Attributes
                 Verb = Verb.Get,
                 Required = parameterInput.Required,
                 Zip = parameterInput.Zip,
+                Ondemand = parameterInput.Ondemand,
             };
         }
 
@@ -37,6 +38,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Attributes
                 Description = parameterOutput.Description,
                 Verb = Verb.Put,
                 Zip = parameterOutput.Zip,
+                Ondemand = parameterOutput.Ondemand,
             };
         }
     }

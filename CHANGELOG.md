@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.0.6] / 2023-08-26
 ### Updated
 - Update `ParameterInputAttribute` with Zip support.
+- Update `ParameterInputAttribute` and `ParameterOutputAttribute` with Ondemand support.
 
 ## [1.0.5] / 2023-08-09
 ### Updated

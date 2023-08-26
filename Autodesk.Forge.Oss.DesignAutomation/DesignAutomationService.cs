@@ -319,7 +319,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation
                         parameterArgumentService.Update(activity);
                     });
                     WriteLine($"[Activity] Created Id: {activity.Id} {activity.Version}");
-                    //WriteLine($"[Activity] Created: {activity.ToJson()}");
+                    WriteLine($"[Activity] Json: {activity.ToJson()}");
 
                     if (ForceDeleteNotUsed)
                     {
@@ -340,7 +340,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation
                 {
                     parameterArgumentService.Update(workItem);
                     WriteLine($"[WorkItem] Created: {workItem.ActivityId}");
-                    //WriteLine($"[WorkItem] Created: {workItem.ToJson()}");
+                    WriteLine($"[WorkItem] Json: {workItem.ToJson()}");
                 });
                 WriteLine($"[WorkItem] {engine}: {workItemStatus.Id}");
                 result &= await WorkItemStatusWait(workItemStatus);
