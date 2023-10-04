@@ -16,6 +16,9 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Attributes
         /// <returns></returns>
         public override Activity Update(Activity activity, string name, object value)
         {
+            if (string.IsNullOrWhiteSpace(value.ToString()))
+                return activity;
+
             var commandLine = $"/l {value}";
             activity.CommandLine.Add(commandLine);
 
