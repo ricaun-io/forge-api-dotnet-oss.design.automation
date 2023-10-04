@@ -303,6 +303,13 @@ namespace Autodesk.Forge.Oss.DesignAutomation
 
             await parameterArgumentService.Initialize();
 
+            // Engine
+            {
+                var engineId = $"{CoreEngine()}+{GetEngineVersion(engine)}";
+                var engineModel = await this.designAutomationClient.GetEngineAsync(engineId);
+                WriteLine($"[Engine]: {engineModel.ToJson()}");
+            }
+
             // Activity
             {
                 var tempActivity = await TryGetActivityAsync(engine);

@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.0.7] / 2023-10-03
 ### Updated
 - Update `ParameterActivityLanguageAttribut	e` to ignore empty value (Fix: #9)
+- Update `DesignAutomationService` show `Engine` when `Run` in the console (Fix: #10)
 
 ## [1.0.6] / 2023-08-26
 ### Updated

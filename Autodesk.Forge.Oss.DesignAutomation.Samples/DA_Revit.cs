@@ -8,11 +8,14 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Samples
 {
     public class DA_Revit
     {
-        public static async Task<bool> Test()
+        public static async Task<bool> Test(string version = null)
         {
+            if (string.IsNullOrEmpty(version))
+                version = "2021";
+
             IDesignAutomationService service = new RevitDesignAutomationService("DeleteWalls")
             {
-                EngineVersions = new[] { "2021" },
+                EngineVersions = new[] { version },
                 EnableConsoleLogger = true,
                 EnableParameterConsoleLogger = true,
                 EnableReportConsoleLogger = true,
@@ -21,8 +24,8 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Samples
             await service.Initialize(@".\DA\DA4Revit\DeleteWalls.zip");
             var result = await service.Run<RevitParameterOptions>(options =>
             {
-                options.RvtFile = @".\DA\DA4Revit\DeleteWalls2021.rvt";
-                options.Result = @"Result2021.rvt";
+                options.RvtFile = $@".\DA\DA4Revit\DeleteWalls{version}.rvt";
+                options.Result = $@"Result{version}.rvt";
             });
 
             await service.Delete();
