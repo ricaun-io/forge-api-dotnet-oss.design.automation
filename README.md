@@ -34,7 +34,8 @@ FORGE_CLIENT_SECRET=<your client secret>
 
 #### Custom
 
-You can define a custom header to be sent with each Design Automation requests to the Forge API. 
+You can define a custom header to be sent with each Design Automation requests to the Forge API.
+**The custom header is only enabled if the engine is deprecated.**
 
 ```bash
 FORGE_CLIENT_CUSTOM_HEADER_VALUE=<your custom header>

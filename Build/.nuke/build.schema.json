@@ -72,6 +72,9 @@
             "type": "string"
           }
         },
+        "ReleaseFolder": {
+          "type": "string"
+        },
         "ReleaseNameVersion": {
           "type": "boolean"
         },

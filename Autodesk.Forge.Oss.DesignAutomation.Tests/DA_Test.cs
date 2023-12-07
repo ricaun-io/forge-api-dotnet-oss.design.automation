@@ -1,8 +1,10 @@
 ﻿using Autodesk.Forge.Core;
+using Autodesk.Forge.Oss.DesignAutomation.Extensions;
 using Autodesk.Forge.Oss.DesignAutomation.Samples.Models;
 using Autodesk.Forge.Oss.DesignAutomation.Services;
 using NUnit.Framework;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Autodesk.Forge.Oss.DesignAutomation.Tests
@@ -45,7 +47,23 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Tests
         [Test]
         public async Task GetNicknameTest()
         {
+            //await service.DeleteForgeAppAsync();
+            //await service.CreateNicknameAsync("nickname");
+
             Console.WriteLine(await service.GetNicknameAsync());
+        }
+
+        [Test]
+        public async Task GetBundles()
+        {
+            var nickname = await service.GetNicknameAsync();
+            var bundles = await service.GetAllBundlesAsync();
+            foreach (var bundle in bundles)
+            {
+                var bundleName = bundle.Split('+')[0].Replace(nickname, "").TrimStart('.');
+                Console.WriteLine($"[{bundle}] - {bundleName}");
+                // await service.DesignAutomationClient.DeleteAppBundleAsync(bundleName);
+            }
         }
 
         [Test(ExpectedResult = false)]
@@ -57,6 +75,32 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Tests
                 options.Result = @$"Result{Engine}.rvt";
             });
             return result;
+        }
+
+        [Explicit]
+        [Test]
+        public async Task GetEngines()
+        {
+            var engines = await PageUtils.GetAllItems(service.DesignAutomationClient.GetEnginesAsync);
+            foreach (var engine in engines.OrderBy(e => e))
+            {
+                var engineModel = await service.DesignAutomationClient.GetEngineDateAsync(engine);
+                //var engineModel = await service.DesignAutomationClient.Service.GetEngineDateAsync(engine);
+                Console.WriteLine($"{engineModel.IsDeprecated()} \t{engineModel.ToJson()}");
+            }
+        }
+
+        [Explicit]
+        [Test]
+        public async Task GetEngineRevit()
+        {
+            var engines = await PageUtils.GetAllItems(service.DesignAutomationClient.GetEnginesAsync);
+            var engine = engines.OrderBy(e => e).LastOrDefault(e => e.Contains("Revit"));
+
+            Console.WriteLine(engine);
+            var engineModel = await service.DesignAutomationClient.GetEngineDateAsync(engine);
+            //var engineModel = await service.DesignAutomationClient.Service.GetEngineDateAsync(engine);
+            Console.WriteLine($"{engineModel.IsDeprecated()} \t{engineModel.ToJson()}");
         }
     }
 }
