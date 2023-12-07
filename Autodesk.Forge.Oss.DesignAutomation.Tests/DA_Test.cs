@@ -1,8 +1,10 @@
 ﻿using Autodesk.Forge.Core;
+using Autodesk.Forge.Oss.DesignAutomation.Extensions;
 using Autodesk.Forge.Oss.DesignAutomation.Samples.Models;
 using Autodesk.Forge.Oss.DesignAutomation.Services;
 using NUnit.Framework;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Autodesk.Forge.Oss.DesignAutomation.Tests
@@ -57,6 +59,19 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Tests
                 options.Result = @$"Result{Engine}.rvt";
             });
             return result;
+        }
+
+        [Explicit]
+        [Test]
+        public async Task GetEngines()
+        {
+            var engines = await PageUtils.GetAllItems(service.DesignAutomationClient.GetEnginesAsync);
+            foreach (var engine in engines.OrderBy(e => e))
+            {
+                //Console.WriteLine(engine);
+                var engineModel = await service.DesignAutomationClient.GetEngineAsync(engine);
+                Console.WriteLine(engineModel.ToJson());
+            }
         }
     }
 }
