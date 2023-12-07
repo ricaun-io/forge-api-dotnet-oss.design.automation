@@ -47,7 +47,23 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Tests
         [Test]
         public async Task GetNicknameTest()
         {
+            //await service.DeleteForgeAppAsync();
+            //await service.CreateNicknameAsync("nickname");
+
             Console.WriteLine(await service.GetNicknameAsync());
+        }
+
+        [Test]
+        public async Task GetBundles()
+        {
+            var nickname = await service.GetNicknameAsync();
+            var bundles = await service.GetAllBundlesAsync();
+            foreach (var bundle in bundles)
+            {
+                var bundleName = bundle.Split('+')[0].Replace(nickname, "").TrimStart('.');
+                Console.WriteLine($"[{bundle}] - {bundleName}");
+                // await service.DesignAutomationClient.DeleteAppBundleAsync(bundleName);
+            }
         }
 
         [Test(ExpectedResult = false)]

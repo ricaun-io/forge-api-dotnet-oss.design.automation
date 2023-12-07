@@ -477,7 +477,12 @@ namespace Autodesk.Forge.Oss.DesignAutomation
             }
         }
 
-        internal async Task<IEnumerable<string>> GetAllBundlesAsync(bool account = true)
+        /// <summary>
+        /// GetAllBundlesAsync
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<string>> GetAllBundlesAsync(bool account = true)
         {
             var data = await PageUtils.GetAllItems(this.designAutomationClient.GetAppBundlesAsync);
             if (account)
