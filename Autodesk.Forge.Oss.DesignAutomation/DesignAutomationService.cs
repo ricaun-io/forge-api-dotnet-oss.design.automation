@@ -150,16 +150,16 @@ namespace Autodesk.Forge.Oss.DesignAutomation
             if (string.IsNullOrEmpty(CustomHeaderValue))
                 return null;
 
-            if (string.IsNullOrEmpty(lastEngineName))
+            if (string.IsNullOrEmpty(lastCustomHeaderEngineName))
                 return null;
 
-            var custom = string.Format(CustomHeaderValue, lastEngineName);
+            var custom = string.Format(CustomHeaderValue, lastCustomHeaderEngineName);
             return custom;
         }
-        private string lastEngineName;
-        private void UpdateEngineName(string engineName)
+        private string lastCustomHeaderEngineName;
+        private void UpdateCustomHeaderEngineName(string engineName)
         {
-            this.lastEngineName = engineName;
+            this.lastCustomHeaderEngineName = engineName;
         }
         #endregion
 
@@ -306,8 +306,13 @@ namespace Autodesk.Forge.Oss.DesignAutomation
             // Engine
             {
                 var engineId = $"{CoreEngine()}+{GetEngineVersion(engine)}";
-                var engineModel = await this.designAutomationClient.GetEngineAsync(engineId);
+                var engineModel = await this.designAutomationClient.GetEngineDateAsync(engineId);
+                var isDeprecated = engineModel.IsDeprecated();
                 WriteLine($"[Engine]: {engineModel.ToJson()}");
+                if (isDeprecated)
+                {
+                    WriteLine($"[Engine]: {engineId} is deprecated.");
+                }
             }
 
             // Activity
@@ -415,7 +420,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation
             {
                 engineResult = $"{CoreEngine()}+{GetEngineVersion(engine)}";
             }
-            UpdateEngineName(engineResult);
+            UpdateCustomHeaderEngineName(engineResult);
             return engineResult;
         }
         #endregion
