@@ -68,10 +68,23 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Tests
             var engines = await PageUtils.GetAllItems(service.DesignAutomationClient.GetEnginesAsync);
             foreach (var engine in engines.OrderBy(e => e))
             {
-                //Console.WriteLine(engine);
-                var engineModel = await service.DesignAutomationClient.GetEngineAsync(engine);
-                Console.WriteLine(engineModel.ToJson());
+                var engineModel = await service.DesignAutomationClient.GetEngineDateAsync(engine);
+                //var engineModel = await service.DesignAutomationClient.Service.GetEngineDateAsync(engine);
+                Console.WriteLine($"{engineModel.IsDeprecated()} \t{engineModel.ToJson()}");
             }
+        }
+
+        [Explicit]
+        [Test]
+        public async Task GetEngineRevit()
+        {
+            var engines = await PageUtils.GetAllItems(service.DesignAutomationClient.GetEnginesAsync);
+            var engine = engines.OrderBy(e => e).LastOrDefault(e => e.Contains("Revit"));
+
+            Console.WriteLine(engine);
+            var engineModel = await service.DesignAutomationClient.GetEngineDateAsync(engine);
+            //var engineModel = await service.DesignAutomationClient.Service.GetEngineDateAsync(engine);
+            Console.WriteLine($"{engineModel.IsDeprecated()} \t{engineModel.ToJson()}");
         }
     }
 }
