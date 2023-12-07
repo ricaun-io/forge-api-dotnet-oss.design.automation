@@ -10,12 +10,12 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Handler
     /// </summary>
     public class ForgeCustomHeaderValueHandler : DelegatingHandler
     {
-        private readonly Func<string> customHeaderValue;
+        private readonly Func<string, string> customHeaderValue;
         /// <summary>
         /// ForgeCustomHeaderValueHandler
         /// </summary>
         /// <param name="customHeaderValue"></param>
-        public ForgeCustomHeaderValueHandler(Func<string> customHeaderValue = null)
+        public ForgeCustomHeaderValueHandler(Func<string, string> customHeaderValue = null)
         {
             this.customHeaderValue = customHeaderValue;
         }
@@ -26,24 +26,28 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Handler
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             if (customHeaderValue is not null)
             {
-                var headerValue = customHeaderValue();
-                if (string.IsNullOrEmpty(headerValue) == false)
+                if (request.Content is StringContent stringContent)
                 {
-                    var values = headerValue.Split(':');
-                    if (values.Length == 2)
+                    var content = await stringContent.ReadAsStringAsync();
+                    var headerValue = customHeaderValue(content);
+                    if (string.IsNullOrEmpty(headerValue) == false)
                     {
-                        var header = values[0].Trim();
-                        var value = values[1].Trim();
-                        request.Headers.Add(header, value);
+                        var values = headerValue.Split(':');
+                        if (values.Length == 2)
+                        {
+                            var header = values[0].Trim();
+                            var value = values[1].Trim();
+                            request.Headers.Add(header, value);
+                        }
                     }
                 }
             }
 
-            return base.SendAsync(request, cancellationToken);
+            return await base.SendAsync(request, cancellationToken);
         }
 
     }

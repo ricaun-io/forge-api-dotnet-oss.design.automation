@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.0.8] / 2023-12-07
 ### Updated
 - Add `DesignAutomationEngineDateUtils` to enable `DeprecationDate` on Engine.
+- Update `ForgeCustomHeaderValueHandler` with content and only when engine is deprecated.
+- Update `UpdateCustomHeaderEngineName` to check if engine is deprecated.
 
 ## [1.0.7] / 2023-10-03
 ### Updated

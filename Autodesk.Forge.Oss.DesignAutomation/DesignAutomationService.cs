@@ -144,22 +144,58 @@ namespace Autodesk.Forge.Oss.DesignAutomation
         /// CustomHeaderValue (default: Environment Variable => "FORGE_CLIENT_CUSTOM_HEADER_VALUE")
         /// <code>x-custom-header: engine value is {0}</code>
         /// </summary>
+        /// <remarks>The custom header is only enabled if the engine is deprecated.</remarks>
         public string CustomHeaderValue { get; init; }
-        private string GetCustomHeaderValue()
+        private string GetCustomHeaderValue(string contentRequest)
         {
             if (string.IsNullOrEmpty(CustomHeaderValue))
                 return null;
 
-            if (string.IsNullOrEmpty(lastCustomHeaderEngineName))
+            string customHeaderEngineName = null;
+            foreach (var key in EnableCustomHeaderValue.Keys)
+            {
+                if (contentRequest.Contains(key))
+                {
+                    customHeaderEngineName = key;
+                }
+            }
+
+            if (string.IsNullOrEmpty(customHeaderEngineName))
                 return null;
 
-            var custom = string.Format(CustomHeaderValue, lastCustomHeaderEngineName);
+            if (EnableCustomHeaderValue.TryGetValue(customHeaderEngineName, out bool isEnabled))
+            {
+#if DEBUG
+                WriteLine($" - [ContentRequest] {contentRequest}");
+                WriteLine($" - [GetCustomHeaderValue]: {customHeaderEngineName} custom header is '{isEnabled}'.");
+#endif
+                if (isEnabled == false)
+                    return null;
+            }
+
+            var custom = string.Format(CustomHeaderValue, customHeaderEngineName);
             return custom;
         }
-        private string lastCustomHeaderEngineName;
+        private Dictionary<string, bool> EnableCustomHeaderValue { get; set; } = new();
         private void UpdateCustomHeaderEngineName(string engineName)
         {
-            this.lastCustomHeaderEngineName = engineName;
+            if (string.IsNullOrEmpty(CustomHeaderValue))
+                return;
+
+            if (EnableCustomHeaderValue.ContainsKey(engineName) == false)
+            {
+                EnableCustomHeaderValue[engineName] = false;
+                try
+                {
+                    var engineModel = this.designAutomationClient.GetEngineDateAsync(engineName).Result;
+                    var isDeprecated = engineModel.IsDeprecated();
+                    EnableCustomHeaderValue[engineName] = isDeprecated;
+#if DEBUG
+                    WriteLine($" - [UpdateCustomHeaderEngineName]: {engineName} custom header is '{isDeprecated}'.");
+#endif
+                }
+                catch { }
+            }
         }
         #endregion
 
@@ -308,7 +344,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation
                 var engineId = $"{CoreEngine()}+{GetEngineVersion(engine)}";
                 var engineModel = await this.designAutomationClient.GetEngineDateAsync(engineId);
                 var isDeprecated = engineModel.IsDeprecated();
-                WriteLine($"[Engine]: {engineModel.ToJson()}");
+                WriteLine($"[Engine]: {engineId} - {engineModel.ToJson()}");
                 if (isDeprecated)
                 {
                     WriteLine($"[Engine]: {engineId} is deprecated.");
