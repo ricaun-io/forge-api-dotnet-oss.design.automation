@@ -137,6 +137,9 @@
         "TestLocalResults": {
           "type": "boolean"
         },
+        "UnlistNuget": {
+          "type": "boolean"
+        },
         "Verbosity": {
           "type": "string",
           "description": "Logging verbosity during build execution. Default is 'Normal'",

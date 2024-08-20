@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] / 2024-08-20
+### Features
+- Support .NET 6.0 and .NET 8.0
+### Updated
+- Update `ricaun.Autodesk.Forge.Oss` to `2.0.0` to fix auth issue.
+
 ## [1.0.8] / 2023-12-07
 ### Updated
 - Add `DesignAutomationEngineDateUtils` to enable `DeprecationDate` on Engine.
@@ -48,6 +54,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - First Release (Copy project from: [RevitAddin.DA.Tester](https://github.com/ricaun-io/RevitAddin.DA.Tester/tree/package))
 
 [vNext]: ../../compare/1.0.0...HEAD
+[2.0.0]: ../../compare/1.0.8...2.0.0
 [1.0.8]: ../../compare/1.0.7...1.0.8
 [1.0.7]: ../../compare/1.0.6...1.0.7
 [1.0.6]: ../../compare/1.0.5...1.0.6
