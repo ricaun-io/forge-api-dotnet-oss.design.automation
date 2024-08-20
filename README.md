@@ -5,7 +5,7 @@
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Build](https://github.com/ricaun-io/forge-api-dotnet-oss.design.automation/actions/workflows/Build.yml/badge.svg)](https://github.com/ricaun-io/forge-api-dotnet-oss.design.automation/actions)
 [![.NET 6.0](https://img.shields.io/badge/.NET%206.0-blue.svg)](https://github.com/ricaun-io/forge-api-dotnet-oss.design.automation)
-[![Release](https://img.shields.io/nuget/v/ricaun.Autodesk.Forge.Oss.DesignAutomation?logo=nuget&label=release&color=blue)](https://www.nuget.org/packages/ricaun.Autodesk.Forge.Oss.DesignAutomation)
+[![Nuget](https://img.shields.io/nuget/v/ricaun.Autodesk.Forge.Oss.DesignAutomation?logo=nuget&label=nuget&color=blue)](https://www.nuget.org/packages/ricaun.Autodesk.Forge.Oss.DesignAutomation)
 
 ### PackageReference
 
