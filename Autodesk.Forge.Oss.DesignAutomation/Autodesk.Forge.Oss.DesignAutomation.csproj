@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>latest</LangVersion>
@@ -92,8 +92,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ricaun.Autodesk.Forge.Oss" Version="*" />
-    <PackageReference Include="Autodesk.Forge.DesignAutomation" Version="*" />
+    <PackageReference Include="ricaun.Autodesk.Forge.Oss" Version="*-*" />
+    <PackageReference Include="Autodesk.Forge.DesignAutomation" Version="5.*" Condition="$(TargetFramework.Contains('net6'))" />
+    <PackageReference Include="Autodesk.Forge.DesignAutomation" Version="6.*" Condition="$(TargetFramework.Contains('net8'))" />
   </ItemGroup>
 
   <ItemGroup>
