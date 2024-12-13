@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [2.1.0] / 2024-12-12
 ### Updated
 - Update `Oss` to use upload files in `s3`.
+- Add `APS_CLIENT_ID`, `APS_CLIENT_SECRET`, `APS_CLIENT_CUSTOM_HEADER_VALUE` to the `DesignAutomationService`.
 
 ## [2.0.0] / 2024-08-20
 ### Features
