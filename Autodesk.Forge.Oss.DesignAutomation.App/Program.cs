@@ -41,11 +41,11 @@ namespace Autodesk.Forge.Oss.DesignAutomation.App
 
             await service.Initialize(@".\DA\DA4Revit\DeleteWalls.zip");
 
-            //var result = await service.Run<RevitParameterOptions>(options =>
-            //{
-            //    options.RvtFile = @$".\DA\DA4Revit\DeleteWalls{Engine}.rvt";
-            //    options.Result = @$"Result{Engine}.rvt";
-            //});
+            var result = await service.Run<RevitParameterOptions>(options =>
+            {
+                options.RvtFile = @$".\DA\DA4Revit\DeleteWalls{Engine}.rvt";
+                options.Result = @$"Result{Engine}.rvt";
+            });
 
             await service.Delete();
         }

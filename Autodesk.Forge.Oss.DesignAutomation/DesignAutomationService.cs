@@ -107,9 +107,9 @@ namespace Autodesk.Forge.Oss.DesignAutomation
             forgeConfiguration = forgeConfiguration ?? new ForgeConfiguration();
 
             if (string.IsNullOrWhiteSpace(forgeConfiguration.ClientId))
-                forgeConfiguration.ClientId = Environment.GetEnvironmentVariable("FORGE_CLIENT_ID");
+                forgeConfiguration.ClientId = Environment.GetEnvironmentVariable("APS_CLIENT_ID") ?? Environment.GetEnvironmentVariable("FORGE_CLIENT_ID");
             if (string.IsNullOrWhiteSpace(forgeConfiguration.ClientSecret))
-                forgeConfiguration.ClientSecret = Environment.GetEnvironmentVariable("FORGE_CLIENT_SECRET");
+                forgeConfiguration.ClientSecret = Environment.GetEnvironmentVariable("APS_CLIENT_SECRET") ?? Environment.GetEnvironmentVariable("FORGE_CLIENT_SECRET");
 
             var service = GetForgeService(forgeConfiguration);
 
@@ -121,7 +121,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation
                 ClientSecret = forgeConfiguration.ClientSecret
             });
 
-            this.CustomHeaderValue = Environment.GetEnvironmentVariable("FORGE_CLIENT_CUSTOM_HEADER_VALUE");
+            this.CustomHeaderValue = Environment.GetEnvironmentVariable("APS_CLIENT_CUSTOM_HEADER_VALUE") ?? Environment.GetEnvironmentVariable("FORGE_CLIENT_CUSTOM_HEADER_VALUE");
         }
         private ForgeService GetForgeService(ForgeConfiguration forgeConfiguration)
         {

@@ -28,6 +28,13 @@
 By default the Forge credentials could be defined with the following environment variables:
 
 ```bash
+APS_CLIENT_ID=<your client id>
+APS_CLIENT_SECRET=<your client secret>
+```
+
+or
+
+```bash
 FORGE_CLIENT_ID=<your client id>
 FORGE_CLIENT_SECRET=<your client secret>
 ```
@@ -36,6 +43,12 @@ FORGE_CLIENT_SECRET=<your client secret>
 
 You can define a custom header to be sent with each Design Automation requests to the Forge API.
 **The custom header is only enabled if the engine is deprecated.**
+
+```bash
+APS_CLIENT_CUSTOM_HEADER_VALUE=<your custom header>
+```
+
+or
 
 ```bash
 FORGE_CLIENT_CUSTOM_HEADER_VALUE=<your custom header>
@@ -147,7 +160,7 @@ Base class `ParameterWorkItemAttribute` is used to update the `WorkItem` before 
 
 ## License
 
-This project is [licensed](LICENSE) under the [MIT Licence](https://en.wikipedia.org/wiki/MIT_License).
+This project is [licensed](LICENSE) under the [MIT License](https://en.wikipedia.org/wiki/MIT_License).
 
 ---
 
