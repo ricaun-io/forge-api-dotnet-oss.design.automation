@@ -32,7 +32,7 @@
 
   <PropertyGroup>
     <PackageId>ricaun.Autodesk.Forge.Oss.DesignAutomation</PackageId>
-    <Version>2.1.0-rc</Version>
+    <Version>2.1.0</Version>
     <ProjectGuid>{B2289CA1-B106-49B3-9077-6C4F28F0F50C}</ProjectGuid>
   </PropertyGroup>
 
@@ -92,7 +92,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ricaun.Autodesk.Forge.Oss" Version="*-*" />
+    <PackageReference Include="ricaun.Autodesk.Forge.Oss" Version="*" />
     <PackageReference Include="Autodesk.Forge.DesignAutomation" Version="5.*" Condition="$(TargetFramework.Contains('net6'))" />
     <PackageReference Include="Autodesk.Forge.DesignAutomation" Version="*" Condition="$(TargetFramework.Contains('net8'))" />
   </ItemGroup>
