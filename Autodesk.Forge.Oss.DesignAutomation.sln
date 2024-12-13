@@ -10,15 +10,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{515EBC53-0951-4B74-90A2-BB78830725AC}"
 	ProjectSection(SolutionItems) = preProject
 		CHANGELOG.md = CHANGELOG.md
+		Directory.Build.props = Directory.Build.props
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autodesk.Forge.Oss.DesignAutomation.Tests", "Autodesk.Forge.Oss.DesignAutomation.Tests\Autodesk.Forge.Oss.DesignAutomation.Tests.csproj", "{F6F94337-FC3F-4183-A332-A22198E55EE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Forge.Oss.DesignAutomation.Samples", "Autodesk.Forge.Oss.DesignAutomation.Samples\Autodesk.Forge.Oss.DesignAutomation.Samples.csproj", "{FCCAD1CB-BE59-40A5-AFC1-C97B63531B82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autodesk.Forge.Oss.DesignAutomation.Samples", "Autodesk.Forge.Oss.DesignAutomation.Samples\Autodesk.Forge.Oss.DesignAutomation.Samples.csproj", "{FCCAD1CB-BE59-40A5-AFC1-C97B63531B82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Forge.Oss.DesignAutomation.App", "Autodesk.Forge.Oss.DesignAutomation.App\Autodesk.Forge.Oss.DesignAutomation.App.csproj", "{4CE6201C-DE04-437F-AF4B-5745B9F43C32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autodesk.Forge.Oss.DesignAutomation.App", "Autodesk.Forge.Oss.DesignAutomation.App\Autodesk.Forge.Oss.DesignAutomation.App.csproj", "{4CE6201C-DE04-437F-AF4B-5745B9F43C32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

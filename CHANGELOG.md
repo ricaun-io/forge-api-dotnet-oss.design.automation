@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] / 2024-12-13
+### Features
+- Support `region` bucket.
+### Updated
+- Update `ricaun.Autodesk.Forge.Oss` to `3.0.0` to fix `region` bucket.
+- Add `BucketRegion` to `DesignAutomationService`.
+- Add `BucketRegion` with `APS_CLIENT_BUCKET_REGION` or `FORGE_CLIENT_BUCKET_REGION`
+- Update `Delete` to delete `bucket` to recreate with `region`.
+
 ## [2.1.0] / 2024-12-12
 ### Updated
 - Update `Oss` to use upload files in `s3`. (Fix: #16)
@@ -59,6 +68,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - First Release (Copy project from: [RevitAddin.DA.Tester](https://github.com/ricaun-io/RevitAddin.DA.Tester/tree/package))
 
 [vNext]: ../../compare/1.0.0...HEAD
+[3.0.0]: ../../compare/2.1.0...3.0.0
 [2.1.0]: ../../compare/2.0.0...2.1.0
 [2.0.0]: ../../compare/1.0.8...2.0.0
 [1.0.8]: ../../compare/1.0.7...1.0.8

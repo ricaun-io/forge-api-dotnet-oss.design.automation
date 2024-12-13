@@ -74,6 +74,11 @@ namespace Autodesk.Forge.Oss.DesignAutomation
         /// ForgeEnvironment (default: "dev")
         /// </summary>
         public string ForgeEnvironment { get; init; } = "dev";
+        /// <summary>
+        /// BucketRegion ("US", "EMEA", "AUS")
+        /// </summary>
+        /// <remarks>Check region available: <code>https://aps.autodesk.com/en/docs/data/v2/reference/http/buckets-POST/</code></remarks>
+        public string BucketRegion { get; init; }
         #endregion
 
         #region public
@@ -121,6 +126,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation
                 ClientSecret = forgeConfiguration.ClientSecret
             });
 
+            this.BucketRegion = Environment.GetEnvironmentVariable("APS_CLIENT_BUCKET_REGION") ?? Environment.GetEnvironmentVariable("FORGE_CLIENT_BUCKET_REGION");
             this.CustomHeaderValue = Environment.GetEnvironmentVariable("APS_CLIENT_CUSTOM_HEADER_VALUE") ?? Environment.GetEnvironmentVariable("FORGE_CLIENT_CUSTOM_HEADER_VALUE");
         }
         private ForgeService GetForgeService(ForgeConfiguration forgeConfiguration)
@@ -141,7 +147,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation
 
         #region Custom Header
         /// <summary>
-        /// CustomHeaderValue (default: Environment Variable => "FORGE_CLIENT_CUSTOM_HEADER_VALUE")
+        /// CustomHeaderValue (default: Environment Variable => "APS_CLIENT_CUSTOM_HEADER_VALUE" or "FORGE_CLIENT_CUSTOM_HEADER_VALUE")
         /// <code>x-custom-header: engine value is {0}</code>
         /// </summary>
         /// <remarks>The custom header is only enabled if the engine is deprecated.</remarks>
@@ -286,6 +292,11 @@ namespace Autodesk.Forge.Oss.DesignAutomation
                 }
                 catch { }
             }
+            try
+            {
+                await DeleteOssBucketKey();
+            }
+            catch { }
         }
 
         #endregion
@@ -929,7 +940,24 @@ namespace Autodesk.Forge.Oss.DesignAutomation
             var nickname = await GetNicknameAsync();
             var bucketKey = nickname.ToLower() + "_" + AppName.ToLower();
             var bucket = await OssClient.TryGetBucketDetailsAsync(bucketKey);
-            if (bucket is null) bucket = await OssClient.CreateBucketAsync(bucketKey);
+            if (bucket is null)
+            {
+                bucket = await OssClient.CreateBucketAsync(bucketKey, BucketRegion);
+                WriteLine($"[Oss] Create: {bucketKey} {BucketRegion}");
+            }
+            return bucketKey;
+        }
+
+        private async Task<string> DeleteOssBucketKey()
+        {
+            var nickname = await GetNicknameAsync();
+            var bucketKey = nickname.ToLower() + "_" + AppName.ToLower();
+            var bucket = await OssClient.TryGetBucketDetailsAsync(bucketKey);
+            if (bucket is not null)
+            {
+                await OssClient.DeleteBucketAsync(bucketKey);
+                WriteLine($"[Oss] Delete: {bucketKey}");
+            }
             return bucketKey;
         }
 

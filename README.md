@@ -39,6 +39,20 @@ FORGE_CLIENT_ID=<your client id>
 FORGE_CLIENT_SECRET=<your client secret>
 ```
 
+#### Region
+
+You can define the region of the bucket. [Available regions](https://aps.autodesk.com/en/docs/data/v2/reference/http/buckets-POST/)
+
+```bash
+APS_CLIENT_BUCKET_REGION=<region>
+```
+
+or
+
+```bash
+FORGE_CLIENT_BUCKET_REGION=<region>
+```
+
 #### Custom
 
 You can define a custom header to be sent with each Design Automation requests to the Forge API.
