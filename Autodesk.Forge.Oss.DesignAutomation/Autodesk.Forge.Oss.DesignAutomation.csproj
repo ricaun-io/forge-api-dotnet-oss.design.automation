@@ -32,7 +32,6 @@
 
   <PropertyGroup>
     <PackageId>ricaun.Autodesk.Forge.Oss.DesignAutomation</PackageId>
-    <Version>2.1.0</Version>
     <ProjectGuid>{B2289CA1-B106-49B3-9077-6C4F28F0F50C}</ProjectGuid>
   </PropertyGroup>
 

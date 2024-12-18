@@ -37,6 +37,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation.App
                 EnableParameterConsoleLogger = true,
                 EnableReportConsoleLogger = true,
                 RunTimeOutMinutes = 1,
+                //BucketRegion="EMEA",
             };
 
             await service.Initialize(@".\DA\DA4Revit\DeleteWalls.zip");
