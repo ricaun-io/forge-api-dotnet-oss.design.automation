@@ -95,7 +95,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ricaun.Autodesk.Forge.Oss" Version="*-*" />
+    <PackageReference Include="ricaun.Autodesk.Forge.Oss" Version="*" />
     <PackageReference Include="Autodesk.Forge.DesignAutomation" Version="5.*" Condition="$(TargetFramework.Contains('net6'))" />
     <PackageReference Include="Autodesk.Forge.DesignAutomation" Version="*" Condition="$(TargetFramework.Contains('net8'))" />
   </ItemGroup>
