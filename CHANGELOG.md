@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] / 2025-01-22
+### Features
+- Support `adsk3LeggedToken` WorkItem with `ParameterWorkItem3LeggedTokenAttribute`.
+- Support `onComplete` WorkItem with `ParameterWorkItemXrefTreeAttribute`.
+### Updated
+- Update `ParameterArgumentService` to get public and private properties.
+
 ## [3.0.0] / 2024-12-13
 ### Features
 - Support `region` bucket.
