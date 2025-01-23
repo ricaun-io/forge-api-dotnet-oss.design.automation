@@ -14,6 +14,12 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Services
         /// <returns></returns>
         public string Serialize(object value);
         /// <summary>
+        /// Serialize <paramref name="value"/> to json string and mask sensitive data
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public string SerializeMasked(object value);
+        /// <summary>
         /// Deserialize <paramref name="value"/> to <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T"></typeparam>

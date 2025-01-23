@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Support `onComplete` WorkItem with `ParameterWorkItemXrefTreeAttribute`.
 ### Updated
 - Update `ParameterArgumentService` to get public and private properties.
+- Update `JsonService` to have `SerializeMasked` to mask sensitive data.
+- Update `WorkItem` to use `ToJsonMasked` to mask sensitive data (`token`).
 
 ## [3.0.0] / 2024-12-13
 ### Features

@@ -27,6 +27,19 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Services
         }
 
         /// <summary>
+        /// Serialize <paramref name="value"/> to json string and mask sensitive data
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public string SerializeMasked(object value)
+        {
+            return JsonConvert.SerializeObject(value, new JsonSerializerSettings
+            {
+                Converters = new[] { new MaskedTokenConverter() }
+            });
+        }
+
+        /// <summary>
         /// Deserialize <paramref name="value"/> to <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -50,5 +63,36 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Services
             return JsonConvert.DeserializeObject(value, type);
         }
         #endregion
+
+        internal class MaskedTokenConverter : JsonConverter
+        {
+            public override bool CanConvert(Type objectType)
+            {
+                return objectType == typeof(string);
+            }
+
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                if (value is string token)
+                {
+                    var propertyName = writer.Path;
+                    if (propertyName.Contains("token", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        var maskedValue = "Masked:token";
+                        writer.WriteValue(maskedValue);
+                        return;
+                    }
+
+                    writer.WriteValue(token);
+                    return;
+                }
+                writer.WriteNull();
+            }
+
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            {
+                return reader.Value?.ToString();
+            }
+        }
     }
 }

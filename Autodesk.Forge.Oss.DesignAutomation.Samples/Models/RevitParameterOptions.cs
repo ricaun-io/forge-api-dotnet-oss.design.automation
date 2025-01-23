@@ -10,5 +10,8 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Samples.Models
 
         [ParameterOutput("result.rvt", DownloadFile = true)]
         public string Result { get; set; }
+
+        [ParameterWorkItem3LeggedToken]
+        string AccessToken { get; set; } = "";
     }
 }
