@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [3.1.0] / 2025-01-22
 ### Features
-- Support `adsk3LeggedToken` WorkItem with `ParameterWorkItem3LeggedTokenAttribute`.
+- Support `adsk3LeggedToken` WorkItem with `ParameterWorkItem3LeggedTokenAttribute`. (Fix: #18)
 - Support `onComplete` WorkItem with `ParameterWorkItemXrefTreeAttribute`.
 ### Updated
 - Update `ParameterArgumentService` to get public and private properties.
