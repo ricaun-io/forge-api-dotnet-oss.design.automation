@@ -35,7 +35,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Services
         {
             return JsonConvert.SerializeObject(value, new JsonSerializerSettings
             {
-                Converters = new[] { new MaskedTokenConverter() }
+                Converters = new[] { new MaskedValueConverter() }
             });
         }
 
@@ -64,7 +64,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Services
         }
         #endregion
 
-        internal class MaskedTokenConverter : JsonConverter
+        internal class MaskedValueConverter : JsonConverter
         {
             public override bool CanConvert(Type objectType)
             {
@@ -73,7 +73,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Services
 
             public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
             {
-                if (value is string token)
+                if (value is string valueString)
                 {
                     var propertyName = writer.Path;
                     if (propertyName.Contains("token", StringComparison.InvariantCultureIgnoreCase))
@@ -82,8 +82,17 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Services
                         writer.WriteValue(maskedValue);
                         return;
                     }
+                    if (propertyName.Contains("url", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        if (Uri.TryCreate(valueString, UriKind.Absolute, out var uri))
+                        {
+                            var maskedValue = uri.GetLeftPart(UriPartial.Authority) + "/"+ "Masked:url";
+                            writer.WriteValue(maskedValue);
+                            return;
+                        }
+                    }
 
-                    writer.WriteValue(token);
+                    writer.WriteValue(valueString);
                     return;
                 }
                 writer.WriteNull();

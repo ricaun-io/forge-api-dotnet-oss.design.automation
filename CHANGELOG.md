@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Update `ParameterArgumentService` to get public and private properties.
 - Update `JsonService` to have `SerializeMasked` to mask sensitive data.
 - Update `WorkItem` to use `ToJsonMasked` to mask sensitive data (`token`).
+- Update `MaskedValueConverter` to mask url and token.
 
 ## [3.0.0] / 2024-12-13
 ### Features
