@@ -47,9 +47,11 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Services
             this.obj = obj;
         }
 
+        private const BindingFlags DefaultLookup = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+
         private void ObjectForEachProperties(Action<PropertyInfo, string, object> actionPropertyNameValue)
         {
-            foreach (var property in obj.GetType().GetProperties())
+            foreach (var property in obj.GetType().GetProperties(DefaultLookup))
             {
                 var name = StringUtils.ConvertUpperToUnderscore(property.Name);
                 var value = property.GetValue(obj);
@@ -59,7 +61,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Services
 
         private async Task ObjectForEachProperties(Func<PropertyInfo, string, object, Task> actionPropertyNameValue)
         {
-            foreach (var property in obj.GetType().GetProperties())
+            foreach (var property in obj.GetType().GetProperties(DefaultLookup))
             {
                 var name = StringUtils.ConvertUpperToUnderscore(property.Name);
                 var value = property.GetValue(obj);

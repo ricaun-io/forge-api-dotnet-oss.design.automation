@@ -87,7 +87,7 @@ The package use the namespace `Autodesk.Forge.Oss.DesignAutomation`.
 ### DesignAutomationService
 
 `DesignAutomationService` class contain the methods to interact with the Oss and Design Automation API. 
-Internaly uses the `ParameterArgumentService` to convert a class with `Attributes` to convert in the `Activity` and `WorkItem` to send the request to the Design Automation API.
+Internally uses the `ParameterArgumentService` to convert a class with `Attributes` to convert in the `Activity` and `WorkItem` to send the request to the Design Automation API.
 
 #### MaxDesignAutomationService
 ```csharp
@@ -171,6 +171,9 @@ Base class `ParameterActivityAttribute` is used to update the `Activity` before 
 Base class `ParameterWorkItemAttribute` is used to update the `WorkItem` before send the request to the Design Automation API.
 
 * `ParameterWorkItemTimeSecAttribute` - Define the timeout of the `WorkItem`.
+* `ParameterWorkItemStringAttribute` - Define the string input in the `WorkItem`.
+* `ParameterWorkItemXrefTreeAttribute` - Define the `XrefTree` input in the `WorkItem`.
+* `ParameterWorkItem3LeggedTokenAttribute` - Define the `adsk3LeggedToken` token input in the `WorkItem`. (`token` is masked in the log.)
 
 ## License
 

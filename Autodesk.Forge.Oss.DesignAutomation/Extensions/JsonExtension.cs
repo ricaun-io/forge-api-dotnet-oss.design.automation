@@ -19,6 +19,16 @@ namespace Autodesk.Forge.Oss.DesignAutomation.Extensions
         }
 
         /// <summary>
+        /// ToJsonMasked using <see cref="JsonService.Instance"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string ToJsonMasked(this object value)
+        {
+            return JsonService.Instance.SerializeMasked(value);
+        }
+
+        /// <summary>
         /// FromJson using <see cref="JsonService.Instance"/>
         /// </summary>
         /// <param name="value"></param>

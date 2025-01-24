@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] / 2025-01-22
+### Features
+- Support `adsk3LeggedToken` WorkItem with `ParameterWorkItem3LeggedTokenAttribute`. (Fix: #18)
+- Support `onComplete` WorkItem with `ParameterWorkItemXrefTreeAttribute`.
+### Updated
+- Update `ParameterArgumentService` to get public and private properties.
+- Update `JsonService` to have `SerializeMasked` to mask sensitive data.
+- Update `WorkItem` to use `ToJsonMasked` to mask sensitive data (`token`).
+- Update `MaskedValueConverter` to mask url and token.
+
 ## [3.0.0] / 2024-12-13
 ### Features
 - Support `region` bucket.
@@ -68,6 +78,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - First Release (Copy project from: [RevitAddin.DA.Tester](https://github.com/ricaun-io/RevitAddin.DA.Tester/tree/package))
 
 [vNext]: ../../compare/1.0.0...HEAD
+[3.1.0]: ../../compare/3.0.0...3.1.0
 [3.0.0]: ../../compare/2.1.0...3.0.0
 [2.1.0]: ../../compare/2.0.0...2.1.0
 [2.0.0]: ../../compare/1.0.8...2.0.0

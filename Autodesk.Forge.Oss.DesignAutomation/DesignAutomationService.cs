@@ -399,7 +399,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation
                 {
                     parameterArgumentService.Update(workItem);
                     WriteLine($"[WorkItem] Created: {workItem.ActivityId}");
-                    WriteLine($"[WorkItem] Json: {workItem.ToJson()}");
+                    WriteLine($"[WorkItem] Json: {workItem.ToJsonMasked()}");
                 });
                 WriteLine($"[WorkItem] {engine}: {workItemStatus.Id}");
                 result &= await WorkItemStatusWait(workItemStatus);
