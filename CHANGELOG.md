@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.1.1] / 2025-02-19
+### Fixed
+- Ignore create/delete error in `BucketKey`.
+
 ## [3.1.0] / 2025-01-22
 ### Features
 - Support `adsk3LeggedToken` WorkItem with `ParameterWorkItem3LeggedTokenAttribute`. (Fix: #18)
@@ -78,6 +82,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - First Release (Copy project from: [RevitAddin.DA.Tester](https://github.com/ricaun-io/RevitAddin.DA.Tester/tree/package))
 
 [vNext]: ../../compare/1.0.0...HEAD
+[3.1.1]: ../../compare/3.1.0...3.1.1
 [3.1.0]: ../../compare/3.0.0...3.1.0
 [3.0.0]: ../../compare/2.1.0...3.0.0
 [2.1.0]: ../../compare/2.0.0...2.1.0

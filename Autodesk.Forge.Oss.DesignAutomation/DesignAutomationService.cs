@@ -942,8 +942,15 @@ namespace Autodesk.Forge.Oss.DesignAutomation
             var bucket = await OssClient.TryGetBucketDetailsAsync(bucketKey);
             if (bucket is null)
             {
-                bucket = await OssClient.CreateBucketAsync(bucketKey, BucketRegion);
-                WriteLine($"[Oss] Create: {bucketKey} {BucketRegion}");
+                try
+                {
+                    bucket = await OssClient.CreateBucketAsync(bucketKey, BucketRegion);
+                    WriteLine($"[Oss] Create: {bucketKey} {BucketRegion}");
+                }
+                catch (Exception ex)
+                {
+                    WriteLine($"[Oss] Create: {bucketKey} {BucketRegion} Exception:{ex.Message}");
+                }
             }
             return bucketKey;
         }
@@ -955,8 +962,15 @@ namespace Autodesk.Forge.Oss.DesignAutomation
             var bucket = await OssClient.TryGetBucketDetailsAsync(bucketKey);
             if (bucket is not null)
             {
-                await OssClient.DeleteBucketAsync(bucketKey);
-                WriteLine($"[Oss] Delete: {bucketKey}");
+                try
+                {
+                    await OssClient.DeleteBucketAsync(bucketKey);
+                    WriteLine($"[Oss] Delete: {bucketKey}");
+                }
+                catch (Exception ex)
+                {
+                    WriteLine($"[Oss] Delete: {bucketKey} Exception:{ex.Message}");
+                }
             }
             return bucketKey;
         }
