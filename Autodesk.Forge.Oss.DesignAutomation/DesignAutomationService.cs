@@ -416,10 +416,10 @@ namespace Autodesk.Forge.Oss.DesignAutomation
         private string GetQualifiedId(string packageName, bool enviromentEnable = true)
         {
             var name = GetNickname();
-            var enviroment = this.ForgeEnvironment;
+            var environment = this.ForgeEnvironment;
             var qualifiedId = $"{name}.{packageName}";
             if (enviromentEnable)
-                qualifiedId += $"+{enviroment}";
+                qualifiedId += $"+{environment}";
             else
                 qualifiedId += $"+{LATEST}";
 
@@ -435,7 +435,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation
         }
         private string GetActivityName(string appName, string engine)
         {
-            return GetActivityName(appName + GetEngineVersion(engine));
+            return GetActivityName(appName + "_" + GetEngineVersion(engine));
         }
         private string GetEngineVersion(string engine)
         {
