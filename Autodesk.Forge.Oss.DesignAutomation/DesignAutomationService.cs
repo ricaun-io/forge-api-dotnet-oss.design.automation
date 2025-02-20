@@ -942,7 +942,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation
                 return _bucketKey;
 
             var nickname = GetNickname();
-            var bucketKey = $"{nickname}_{AppName}_{this.GetHashCode()}";
+            var bucketKey = $"{nickname}_{AppName}";
 
             _bucketKey = bucketKey.ToLower();
             return _bucketKey;

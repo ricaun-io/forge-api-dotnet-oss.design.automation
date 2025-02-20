@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [3.1.1] / 2025-02-19
 ### Updated
-- Add `GetBucketKey` to create unique bucket key with hash.
+- Add `GetBucketKey` to get bucket key.
 
 ## [3.1.0] / 2025-01-22
 ### Features
