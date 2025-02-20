@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [3.1.1] / 2025-02-19
 ### Fixed
-- Ignore create/delete error in `BucketKey`.
+- RollBack - Ignore create/delete error in `BucketKey`.
 
 ## [3.1.0] / 2025-01-22
 ### Features
