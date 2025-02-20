@@ -935,10 +935,21 @@ namespace Autodesk.Forge.Oss.DesignAutomation
         #endregion
 
         #region Oss
+        private string _bucketKey;
+        private string GetBucketKey()
+        {
+            if (!string.IsNullOrEmpty(_bucketKey))
+                return _bucketKey;
+
+            var nickname = GetNickname();
+            var bucketKey = $"{nickname}_{AppName}_{this.GetHashCode()}";
+
+            _bucketKey = bucketKey.ToLower();
+            return _bucketKey;
+        }
         private async Task<string> CreateOssBucketKey()
         {
-            var nickname = await GetNicknameAsync();
-            var bucketKey = nickname.ToLower() + "_" + AppName.ToLower();
+            var bucketKey = GetBucketKey();
             var bucket = await OssClient.TryGetBucketDetailsAsync(bucketKey);
             if (bucket is null)
             {
@@ -950,8 +961,7 @@ namespace Autodesk.Forge.Oss.DesignAutomation
 
         private async Task<string> DeleteOssBucketKey()
         {
-            var nickname = await GetNicknameAsync();
-            var bucketKey = nickname.ToLower() + "_" + AppName.ToLower();
+            var bucketKey = GetBucketKey();
             var bucket = await OssClient.TryGetBucketDetailsAsync(bucketKey);
             if (bucket is not null)
             {
@@ -959,28 +969,6 @@ namespace Autodesk.Forge.Oss.DesignAutomation
                 WriteLine($"[Oss] Delete: {bucketKey}");
             }
             return bucketKey;
-        }
-
-        private async Task<string> UploadFile(string localFullName, string name, string engine = null)
-        {
-            var fileName = name + engine;
-            var bucketKey = await CreateOssBucketKey();
-            var objectDetails = await OssClient.UploadFileAsync(bucketKey, fileName, localFullName);
-            return await OssClient.CreateSignedFileAsync(bucketKey, fileName);
-        }
-
-        private async Task<string> CreateWrite(string name, string engine = null)
-        {
-            var fileName = name + engine;
-            var bucketKey = await CreateOssBucketKey();
-            return await OssClient.CreateSignedFileWriteAsync(bucketKey, fileName);
-        }
-
-        private async Task<string> CreateReadWrite(string name, string engine = null)
-        {
-            var fileName = name + engine;
-            var bucketKey = await CreateOssBucketKey();
-            return await OssClient.CreateSignedFileAsync(bucketKey, fileName, "readwrite");
         }
 
         /// <summary>
